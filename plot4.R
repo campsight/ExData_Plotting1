@@ -8,6 +8,7 @@ selectedPowerData$DateTime <- strptime(paste(selectedPowerData$Date, selectedPow
 # draw plot
 ## prepare for 4 graphs
 par(mfrow=c(2,2))
+par(bg=NA)
 
 ## graph 1
 plot(selectedPowerData$DateTime, selectedPowerData$Global_active_power, xlab=" ", ylab="Global Active Power", type="l")
@@ -26,5 +27,6 @@ legend("topright", col=c("black", "red", "blue"), legend=names(selectedPowerData
 plot(selectedPowerData$DateTime, selectedPowerData$Global_reactive_power, xlab="datetime", ylab="Global_reactive_power", type="l")
 
 # write to png
-dev.copy(png, file="plot4.png")
+if (!file.exists("./figure")){dir.create("./figure")}
+dev.copy(png, file="./figure/plot4.png")
 dev.off()

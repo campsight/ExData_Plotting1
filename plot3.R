@@ -7,6 +7,7 @@ selectedPowerData <- subset(fulldataset, Date == as.Date("01022007", format="%d%
 selectedPowerData$DateTime <- strptime(paste(selectedPowerData$Date, selectedPowerData$Time), format="%Y-%m-%d %H:%M:%S")
 
 # draw plot
+par(bg=NA)
 plot(selectedPowerData$DateTime, selectedPowerData$Sub_metering_1, xlab=" ", ylab="Energy sub metering", type="n")
 lines(selectedPowerData$DateTime, selectedPowerData$Sub_metering_1)
 lines(selectedPowerData$DateTime, selectedPowerData$Sub_metering_2, col="red")
@@ -14,5 +15,6 @@ lines(selectedPowerData$DateTime, selectedPowerData$Sub_metering_3, col="blue")
 legend("topright", col=c("black", "red", "blue"), legend=names(selectedPowerData)[7:9], lty=1)
 
 # write to png
-dev.copy(png, file="plot3.png")
+if (!file.exists("./figure")){dir.create("./figure")}
+dev.copy(png, file="./figure/plot3.png")
 dev.off()

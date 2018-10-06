@@ -7,8 +7,10 @@ selectedPowerData <- subset(fulldataset, Date == as.Date("01022007", format="%d%
 selectedPowerData$DateTime <- strptime(paste(selectedPowerData$Date, selectedPowerData$Time), format="%Y-%m-%d %H:%M:%S")
 
 # draw plot
+par(bg=NA)
 plot(selectedPowerData$DateTime, selectedPowerData$Global_active_power, xlab=" ", ylab="Global Active Power (kilowatts)", type="l")
 
 # write to png
-dev.copy(png, file="plot2.png")
+if (!file.exists("./figure")){dir.create("./figure")}
+dev.copy(png, file="./figure/plot2.png")
 dev.off()
